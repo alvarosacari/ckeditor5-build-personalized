@@ -9,7 +9,7 @@
 
 const path = require( 'path' );
 const webpack = require( 'webpack' );
-const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
+const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
 
@@ -32,11 +32,11 @@ module.exports = {
 	optimization: {
 		minimizer: [
 			new TerserPlugin( {
-				sourceMap: true,
+				sourceMap: false,
 				terserOptions: {
 					output: {
-						// Preserve CKEditor 5 license comments.
-						comments: /^!/
+						// Preserve banner eslint-disable comment.
+						comments: /\b(\w*eslint-disable\w*)\b/
 					}
 				},
 				extractComments: false
@@ -52,7 +52,7 @@ module.exports = {
 			additionalLanguages: 'all'
 		} ),
 		new webpack.BannerPlugin( {
-			banner: bundler.getLicenseBanner(),
+			banner: '/* eslint-disable */',
 			raw: true
 		} )
 	],
@@ -79,7 +79,9 @@ module.exports = {
 						loader: 'postcss-loader',
 						options: styles.getPostCssConfig( {
 							themeImporter: {
-								themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
+								themePath: require.resolve(
+									'@ckeditor/ckeditor5-theme-lark'
+								)
 							},
 							minify: true
 						} )
