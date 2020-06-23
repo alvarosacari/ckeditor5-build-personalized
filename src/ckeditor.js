@@ -7,96 +7,103 @@
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+import Title from '@ckeditor/ckeditor5-heading/src/title';
+import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
+import List from '@ckeditor/ckeditor5-list/src/list';
+import Link from '@ckeditor/ckeditor5-link/src/link';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
+import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
 	Essentials,
-	UploadAdapter,
 	Autoformat,
+	Heading,
+	Title,
+	Paragraph,
 	Bold,
 	Italic,
-	BlockQuote,
-	CKFinder,
-	EasyImage,
-	Heading,
+	Code,
+	List,
+	Link,
 	Image,
 	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
-	Indent,
-	Link,
-	List,
-	MediaEmbed,
-	Paragraph,
-	PasteFromOffice,
+	SimpleUploadAdapter,
+	BlockQuote,
 	Table,
 	TableToolbar,
-	TextTransformation
+	MediaEmbed,
+	CodeBlock
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
+	codeBlock: {
+		indentSequence: '  '
+	},
+	image: {
+		styles: [ 'full' ],
+		toolbar: [ 'imageTextAlternative' ],
+		upload: {
+			types: [ 'jpeg', 'png', 'webp', 'gif', 'svg+xml' ]
+		}
+	},
+	simpleUpload: {
+		uploadUrl: 'http://upload-url.com',
+		headers: {
+			'X-CSRF-TOKEN': 'CSFR-Token',
+			Authorization: 'Bearer <JSON Web Token>'
+		}
+	},
+	table: {
+		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+	},
+	title: {
+		placeholder: 'Escriba el título'
+	},
+	placeholder: 'Escriba o pegue el contenido aquí.',
 	toolbar: {
 		items: [
 			'heading',
 			'|',
 			'bold',
 			'italic',
-			'link',
+			'|',
 			'bulletedList',
 			'numberedList',
 			'|',
-			'indent',
-			'outdent',
-			'|',
-			'imageUpload',
+			'link',
 			'blockQuote',
+			'imageUpload',
 			'insertTable',
 			'mediaEmbed',
+			'|',
+			'code',
+			'codeBlock',
+			'|',
 			'undo',
 			'redo'
 		]
 	},
-	image: {
-		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
-			'|',
-			'imageTextAlternative'
-		]
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
-	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	language: 'es'
 };
