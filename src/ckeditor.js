@@ -9,7 +9,6 @@ import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classicedi
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Title from '@ckeditor/ckeditor5-heading/src/title';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
@@ -35,7 +34,6 @@ ClassicEditor.builtinPlugins = [
 	Essentials,
 	Autoformat,
 	Heading,
-	Title,
 	Paragraph,
 	Bold,
 	Italic,
@@ -76,9 +74,6 @@ ClassicEditor.defaultConfig = {
 	},
 	table: {
 		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-	},
-	title: {
-		placeholder: 'Escriba el título'
 	},
 	placeholder: 'Escriba o pegue el contenido aquí.',
 	toolbar: {
