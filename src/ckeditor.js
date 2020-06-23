@@ -77,6 +77,7 @@ ClassicEditor.defaultConfig = {
 	},
 	placeholder: 'Escriba o pegue el contenido aquí.',
 	toolbar: {
+		viewportTopOffset: 0,
 		items: [
 			'heading',
 			'|',
